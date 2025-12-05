@@ -408,10 +408,10 @@ class Boss extends Unit {
         const faceRight = this.side === 'player' ? true : false;
         // keep explicit file paths for right/left variants
         // use project assets (absolute paths) and preload them so GIF animations run reliably
-        this._gifLeft = '/向左攻擊圖.gif';
-        this._gifRight = '/向右攻擊圖.gif';
-        this._flameLeft = '/向左噴火圖.gif';
-        this._flameRight = '/向右噴火圖.gif';
+        this._gifLeft = './向左攻擊圖.gif';
+        this._gifRight = './向右攻擊圖.gif';
+        this._flameLeft = './向左噴火圖.gif';
+        this._flameRight = './向右噴火圖.gif';
 
         // preload GIFs to avoid flicker on first switch
         try {
@@ -1163,5 +1163,6 @@ function init() {
     // keep original behavior: game loop starts when pressing '冒險開始' inside introModal
     // 遊戲從開場故事開始，按下「冒險開始」後才啟動循環
 }
+
 
 window.addEventListener('load', init);
