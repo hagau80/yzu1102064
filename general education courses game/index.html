@@ -283,13 +283,17 @@
         /* 左下角故事標籤（已移除） */
         
         /* 底部控制列在小螢幕時略微調整高度並保留更多寬度空間 */
-        @media (max-width: 640px) {
-            .h-[140px] { height: 100px; } /* 底部更小，讓中間畫面更大 */
-            .flex-1.min-w-\[100px\] { min-width: 86px; } /* make card min width smaller */
+         @media (max-width: 640px) {
+        .h-
+
+         \[140px\]
+
+         { height: 100px; } /* 底部更小，讓中間畫面更大 */
+            .flex-1[class*="min-w-[100px]"] { min-width: 86px; } /* make card min width smaller */
             .quiz-question { font-size: 11px; }
             .quiz-option-btn { font-size: 11px; padding: 6px 4px; min-height:40px; }
             .quiz-tag { font-size: 11px; top: -10px; left: 12px; padding: 4px 7px; }
-        }
+         }
 
         /* 增加行動觸控按鈕區域（讓出兵按鈕更好點） */
         #spawnInfantry, #spawnArcher, #spawnCavalry {
