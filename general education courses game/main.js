@@ -428,7 +428,7 @@ class Boss extends Unit {
         const defaultGif = faceRight ? this._gifRight : this._gifLeft;
 
         this.el.innerHTML = `
-            <div style="position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center;filter: drop-shadow(0 5px 80px rgba(0,0,0,0.3));">
+            <div style="position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center;filter: drop-shadow(0 5px 80px rgba(255,0,0,0.3));">
                 <img id="bossImg-${this.id}" src="${defaultGif}" style="width:100%; height:100%; object-fit:contain;" />
                 <div style="position:absolute; inset:0; pointer-events:none;">
                     <!-- glowing eyes / weapon overlay -->
@@ -1177,5 +1177,6 @@ function init() {
 }
 
 window.addEventListener('load', init);
+
 
 
