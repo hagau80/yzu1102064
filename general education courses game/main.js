@@ -429,10 +429,10 @@ class Boss extends Unit {
 
         this.el.innerHTML = `
             <div style="position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
-                <img id="bossImg-${this.id}" src="${defaultGif}" style="width:100%; height:100%; object-fit:contain; mix-blend-mode:screen; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));" />
+                <img id="bossImg-${this.id}" src="${defaultGif}" style="width:100%; height:100%; object-fit:contain;" />
                 <div style="position:absolute; inset:0; pointer-events:none;">
                     <!-- glowing eyes / weapon overlay -->
-                    <div style="position:absolute; left:50%; top:28%; transform:translateX(-50%); width:40%; height:10%; background:linear-gradient(90deg, rgba(255,255,180,0.9), rgba(255,120,120,0.9)); filter:blur(8px); opacity:0.9; border-radius:50%; mix-blend-mode:screen;"></div>
+                    <div style="position:absolute; left:50%; top:28%; transform:translateX(-50%); width:40%; height:10%; background:linear-gradient(90deg, rgba(255,255,180,0.9), rgba(255,120,120,0.9)); filter:blur(8px); opacity:0.9; border-radius:50%;"></div>
                 </div>
             </div>
             <div class="absolute -top-3 w-full h-1.5 bg-gray-700 border border-white rounded overflow-hidden">
@@ -559,20 +559,32 @@ class Boss extends Unit {
         // determine facing toward the primary target (if available) and set correct gif
         const img = this.el.querySelector(`#bossImg-${this.id}`);
         if (img) {
+            if (!img.dataset.src) img.dataset.src = img.src;
+        
             if (target) {
                 const dir = Math.sign(target.x - this.x) || -1;
-                img.src = (dir >= 0) ? this._gifRight : this._gifLeft;
+                const desired = (dir >= 0) ? this._gifRight : this._gifLeft;
+                if (img.dataset.src !== desired) {
+                    img.dataset.src = desired;
+                    img.src = desired;
+                }
             } else {
-                // revert to facing based on current movement/prevX after attack
                 const moveDelta = this.x - prevX;
                 if (moveDelta > 0.5) {
-                    // moving right -> show right-facing static attack/frame
-                    img.src = this._gifRight;
+                    const desired = this._gifRight;
+                    if (img.dataset.src !== desired) {
+                        img.dataset.src = desired;
+                        img.src = desired;
+                    }
                 } else if (moveDelta < -0.5) {
-                    // moving left -> show left-facing
-                    img.src = this._gifLeft;
+                    const desired = this._gifLeft;
+                    if (img.dataset.src !== desired) {
+                        img.dataset.src = desired;
+                        img.src = desired;
+                    }
                 }
             }
+        
         }
 
         // clamp on battlefield
@@ -1163,6 +1175,5 @@ function init() {
     // keep original behavior: game loop starts when pressing '冒險開始' inside introModal
     // 遊戲從開場故事開始，按下「冒險開始」後才啟動循環
 }
-
 
 window.addEventListener('load', init);
